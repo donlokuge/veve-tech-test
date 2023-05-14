@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+yarn nx format:write --uncommitted --parallel
+yarn nx affected --target=lint --uncommitted --parallel --nx-bail
