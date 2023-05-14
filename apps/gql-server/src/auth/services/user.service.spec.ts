@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { UserService } from './user.service';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 import * as bcrypt from 'bcrypt';
 
 describe('UserService', () => {
@@ -41,7 +41,7 @@ describe('UserService', () => {
       const user = new User();
       user.username = input.username;
       user.password = await bcrypt.hash(input.password, await bcrypt.genSalt());
-      user.role = 'admin';
+      user.role = UserRole.ADMIN;
 
       jest.spyOn(repo, 'create').mockReturnValue(user);
       jest.spyOn(repo, 'save').mockResolvedValue(user);

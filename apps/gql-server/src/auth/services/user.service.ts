@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AuthInput } from '../dto/auth-input.dto';
@@ -21,7 +21,7 @@ export class UserService {
     const user = this.userRepository.create({
       username,
       password: hashedPassword,
-      role: 'admin', // FIX::
+      role: UserRole.ADMIN, // FIX::
     });
 
     try {
