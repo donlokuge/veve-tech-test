@@ -4,7 +4,7 @@ import { UserService } from './user.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { UnauthorizedException } from '@nestjs/common';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -42,7 +42,7 @@ describe('AuthService', () => {
         id: '12345',
         username: input.username,
         password: await bcrypt.hash(input.password, await bcrypt.genSalt()),
-        role: 'admin',
+        role: UserRole.ADMIN,
       };
       const payload = { sub: user.id };
       const accessToken = 'testToken';
